@@ -1,1 +1,44 @@
 // app global css in SCSS form
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype"),
+    url("/fonts/montserrat-regular-webfont.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Medium.ttf") format("truetype"),
+    url("/fonts/montserrat-medium-webfont.woff") format("woff");
+  font-style: medium;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-SemiBold.ttf") format("truetype"),
+    url("/fonts/montserrat-semibold-webfont.woff") format("woff");
+  font-style: semibold;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Bold.ttf") format("truetype"),
+    url("/fonts/montserrat-bold-webfont.woff") format("woff");
+  font-style: bold;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Black.ttf") format("truetype"),
+    url("/fonts/montserrat-black-webfont.woff") format("woff");
+  font-style: black;
+  font-weight: 900;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
