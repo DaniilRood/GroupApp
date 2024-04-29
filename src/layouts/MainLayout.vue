@@ -1,43 +1,71 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+    <q-header class="bg-primary" reveal height-hint="60">
+      <q-toolbar class=" text-grey-6">
+      
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <div class="q-pr-lg q-pt-md">
+          <img class="" src="../assets/image/logo-homepage.svg">
+        </div>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-space />
+
+        <div class="row no-wrap">
+          <q-input dense outlined flat placeholder="Поиск" class="bg-white col" />
+          <q-btn class="" color="grey-3" text-color="grey-8" icon="search" unelevated />
+        </div>
+
+        <q-space />
+
+        <div class="q-pl-md q-gutter-sm row no-wrap items-center">
+          <q-btn round dense flat color="white" size="14px">
+            О нас
+          </q-btn>
+
+          <q-btn to="/catalog" round dense flat color="white">
+            Каталог
+          </q-btn>
+
+          <q-btn to="/cart" round dense flat color="white" icon="shopping_cart">
+            <q-badge color="red" text-color="white" floating>
+              2
+            </q-badge>
+            <q-tooltip>Корзина</q-tooltip>
+          </q-btn>
+
+          <q-btn to="/personal" round flat icon="perm_identity" color="white">
+            <q-tooltip>Личынй кабинет</q-tooltip>
+          </q-btn>
+
+          <q-btn color="secondary" class="text-black">
+            Выйти
+          </q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+    <q-footer bordered class="bg-primary">
+        <div class="q-pr-lg footer-nav">
+          <div class="q-pa-xl">
+              <img class="" src="../assets/image/logo-homepage.svg">
+          </div>
+          <div class="footer-nav q-pa-xl">
+            <div class="q-pa-md">
+              <p class="text-white footer-text text-h6">Страницы</p>
+              <p class="text-white footer-text">Личынй кабинет</p>
+              <p class="text-white footer-text">Каталог</p>
+            </div>
+            <div class="q-pa-md">
+              <p class="text-white footer-text text-h6">Контакты</p>
+              <p class="text-white footer-text">+7 (495) 987 65 43</p>
+              <p class="text-white footer-text">welcome@shook.ru</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-white footer-rights">
+          &#169;Все права защищены
+        </div>
+      </q-footer>
 
     <q-page-container>
       <router-view />
@@ -53,50 +81,7 @@ defineOptions({
   name: 'MainLayout'
 })
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+
 
 const leftDrawerOpen = ref(false)
 
@@ -104,3 +89,23 @@ function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>
+
+<style>
+  .footer-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .footer-text {
+    text-transform: uppercase;
+    opacity: 0.7;
+    letter-spacing: 2px;
+  }
+  .footer-rights {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    letter-spacing: 2px;
+  }
+</style>
