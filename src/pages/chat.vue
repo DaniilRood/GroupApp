@@ -35,39 +35,44 @@
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
-  data() {
-    return {
-      newMessage: "",
-      messages: [
-        {
-          text: "Есть один вопрос!",
-          from: "Клиент",
-        },
-        {
-          text: "Отвечу на любой вопрос!",
-          from: "Шук Ассистент",
-        },
-        {
-          text: "Вот такой вопрос!",
-          from: "Клиент",
-        },
-      ],
-    };
-  },
-  methods: {
-    sendMessage() {
-      this.newMessage = this.newMessage.trim();
-      if (this.newMessage.length === 0) {
+  setup() {
+    const newMessage = ref("");
+    const messages = ref([
+      {
+        text: "Есть один вопрос!",
+        from: "Клиент",
+      },
+      {
+        text: "Отвечу на любой вопрос!",
+        from: "Шук Ассистент",
+      },
+      {
+        text: "Вот такой вопрос!",
+        from: "Клиент",
+      },
+    ]);
+
+    const sendMessage = () => {
+      newMessage.value = newMessage.value.trim();
+      if (newMessage.value.length === 0) {
         return;
       }
 
-      this.messages.push({
-        text: this.newMessage,
+      messages.value.push({
+        text: newMessage.value,
         from: "Клиент",
       });
-      this.newMessage = "";
-    },
+      newMessage.value = "";
+    };
+
+    return {
+      newMessage,
+      messages,
+      sendMessage,
+    };
   },
 };
 </script>
