@@ -1,23 +1,30 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class="flex flex-center fullscreen ">
     <div>
-      <div style="font-size: 30vh">
-        404
+      
+      <div class="text-h3 no-page-text">
+        Страница не найдена!
+      </div>
+      
+      <div class="box">
+          <q-img class="img-four" src="../assets/image/4.png" alt="404" />
+          <q-img class="img-clock" src="../assets/image/picture404.png" alt="404" />
+          <q-img class="img-four" src="../assets/image/4.png" alt="404" />
       </div>
 
-      <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
-      </div>
-
-      <q-btn
+      
+      <div class="flex flex-center">
+        <q-btn
         class="q-mt-xl"
-        color="white"
-        text-color="blue"
-        unelevated
+        color="secondary"
+        text-color="black"
+        size="xl"
         to="/"
-        label="Go Home"
+        label="На главную"
         no-caps
-      />
+        />
+      </div>
+      
     </div>
   </div>
 </template>
@@ -27,3 +34,26 @@ defineOptions({
   name: 'ErrorNotFound'
 });
 </script>
+
+<style>
+
+  .text-color {
+    color: #17496A;
+  }
+  .img-clock {
+    width: 60%;
+  }
+  .img-four {
+    width: 20%;
+  }
+  .box {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  
+  .no-page-text {
+    color: #17496A;
+  }
+  
+
+</style>
