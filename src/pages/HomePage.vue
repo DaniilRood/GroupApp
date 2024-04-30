@@ -1,11 +1,13 @@
 <template>
-  <q-page style="margin: 0 auto; width: 1200px;" >
+  <q-page class="wrapper">
     <div class="box-home q-pt-xl q-mb-xl">
-      <div style="width: 600px">
+      <div class="format-text">
         <q-img src="../assets/image/header-question.svg" width="600px"/>
         <p class="text-uppercase text-dark text-h6 text-center">Виртуальный помощник <span class="text-weight-bolder">Шук</span> рад помочь!</p>
-        <p class="text-uppercase text-center"><span class="text-weight-bolder">пройдите короткий опрос!</span> наш виртуальный помощник подберёт литературу на ваш вкус с учётом оценок других пользователей и новинок.</p>
-        <q-btn to="/chat" class="text-black text-weight-bolder" no-caps style="width: 600px" color="secondary" icon="help" label="Спросить Шука" />
+        <p class="text-uppercase text-center">
+          <span class="text-weight-bolder">пройдите короткий опрос!</span> наш виртуальный помощник подберёт литературу на ваш вкус с учётом оценок других пользователей и новинок.
+        </p>
+        <q-btn to="/chat" class="text-black text-weight-bolder format-text" no-caps color="secondary" icon="help" label="Спросить Шука" />
       </div>
       <div>
         <q-img src="../assets/image/shook.png" width="400px" />
@@ -55,5 +57,12 @@ defineOptions({
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+  .wrapper {
+    margin: 0 auto; 
+    width: 1200px;
+  }
+  .format-text {
+    width: 600px;
   }
 </style>
