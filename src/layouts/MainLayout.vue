@@ -30,7 +30,7 @@
         <div class="q-pl-md q-gutter-sm row no-wrap items-center">
           <q-btn to="/" round dense flat color="white">Главная</q-btn>
 
-          <q-btn round dense flat color="white" size="14px"> О нас </q-btn>
+          <q-btn to="/about" round dense flat color="white" size="14px"> О нас </q-btn>
 
           <q-btn to="/catalog" round dense flat color="white">Каталог</q-btn>
 
