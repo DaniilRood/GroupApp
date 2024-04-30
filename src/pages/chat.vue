@@ -1,6 +1,6 @@
 <template>
-  <q-page class="flex column">
-    <div class="q-pa-md column justify-end">
+  <q-page class="chat-wrapper column">
+    <q-scroll-area class="chat q-pa-md column">
       <q-chat-message
         v-for="message in messages"
         :key="message.text"
@@ -9,28 +9,33 @@
         :sent="message.from == 'Клиент' ? true : false"
         bg-color="teal-12"
       />
-    </div>
-
-    <q-form @submit="sendMessage" @keyup.enter="sendMessage" class="full-width"
-      ><q-input
-        v-model="newMessage"
-        bg-color="white"
-        outlined
-        rounded
-        label="Message"
-        dense
-      >
-        <template v-slot:after>
-          <q-btn
-            round
-            dense
-            flat
-            color="deep-purple-12"
-            type="submit"
-            icon="send"
-          />
-        </template> </q-input
-    ></q-form>
+    </q-scroll-area>
+    <q-toolbar class="input-wrapper"
+      ><q-form
+        @submit="sendMessage"
+        @keyup.enter="sendMessage"
+        class="full-width"
+        ><q-input
+          v-model="newMessage"
+          bg-color="white"
+          outlined
+          rounded
+          placeholder="Введите сообщение"
+          dense
+        >
+          <template v-slot:after>
+            <q-btn
+              @click="sendMessage"
+              round
+              dense
+              flat
+              color="deep-purple-12"
+              type="submit"
+              icon="send"
+            />
+          </template> </q-input
+      ></q-form>
+    </q-toolbar>
   </q-page>
 </template>
 
@@ -66,6 +71,7 @@ export default {
         from: "Клиент",
       });
       newMessage.value = "";
+      newMessage.focus();
     };
 
     return {
@@ -76,3 +82,20 @@ export default {
   },
 };
 </script>
+
+<style>
+.chat-wrapper {
+  justify-content: space-between;
+  max-width: 754px;
+  margin: 0 auto;
+}
+.chat {
+  height: 50vh;
+}
+.input-wrapper {
+  max-width: 754px;
+  height: 60px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+</style>
