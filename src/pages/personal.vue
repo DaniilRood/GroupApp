@@ -9,8 +9,8 @@
         <q-avatar size="100px" font-size="52px" color="teal" text-color="white" class="q-mb-">
           <img src="https://cdn.quasar.dev/img/avatar.png">
         </q-avatar>  
-        <p class="text-h6 text-bold">Имя Фамилия</p>
-        <p class="text-h6 text-bold">mail</p>
+        <p class="text-h6 text-bold text-dark">{{ name }} {{ surname }}</p>
+        <p class="text-h6 text-bold text-dark">{{ email }}</p>
       </div>
 
       <div class="shadow-4 q-pa-md q-ml-xl box-order rounded-borders">
@@ -25,6 +25,20 @@
     
   </q-page>
 </template>
+
+<script setup>
+  import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
+  import { useQuasar } from 'quasar'
+  import { auth } from '../firebase'
+
+  const name = ref(localStorage.getItem('name') || '')
+  const surname = ref(localStorage.getItem('surname') || '')
+  const email = ref(auth.currentUser?.email || '')
+
+  const router = useRouter()
+  const $q = useQuasar()
+</script>
 
 <style>
   .box-order {
