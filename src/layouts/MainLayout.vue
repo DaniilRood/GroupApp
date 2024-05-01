@@ -58,10 +58,10 @@
         <div class="footer-nav q-pa-xl">
           <div class="q-pa-md">
             <p class="text-white footer-text text-h6 q-ml-md">Страницы</p>
-            <q-btn class="text-white footer-text block" flat
+            <q-btn to="/personal" class="text-white footer-text block" flat
               >Личынй кабинет</q-btn
             >
-            <q-btn class="text-white footer-text block" flat>Каталог</q-btn>
+            <q-btn to="/catalog" class="text-white footer-text block" align="left" flat>Каталог</q-btn>
           </div>
           <div class="q-pa-md">
             <p class="text-white footer-text text-h6">Контакты</p>
