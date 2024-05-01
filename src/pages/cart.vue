@@ -19,17 +19,13 @@
 
 <style lang="scss">
 .cart {
-  margin-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 100px auto 0;
   max-width: 1140px;
   letter-spacing: 2px;
   padding-top: 20px;
   display: grid;
   grid-template-columns: 1140px;
   justify-content: center;
-  // background-color: white;
-  // filter: drop-shadow(0.15rem 0.15rem 0.4rem rgba(0, 0, 0, 0.1));
   &__navbar {
     display: flex;
     align-items: center;
