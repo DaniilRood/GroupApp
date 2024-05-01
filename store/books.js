@@ -6,5 +6,13 @@ export const booksStore = defineStore("books", {
     cart: [],
   }),
 
-  actions: {},
+  // actions: {
+  //   addToCart(book) {
+  //     this.cart.push(book);
+  //   },
+
+  //   removeFromCart(id) {
+  //     this.cart = this.cart.filter((item) => item.id !== id);
+  //   },
+  // },
 });
