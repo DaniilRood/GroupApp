@@ -9,15 +9,15 @@ const routes = [
       { path: "/cart", component: () => import("src/pages/cart.vue") },
       { path: "/chat", component: () => import("src/pages/chat.vue") },
       { path: "/about", component: () => import("src/pages/about.vue") },
+      { path: "/auth", component: () => import("src/pages/auth.vue") }
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
+
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),
   },
 ];
-
+  
 export default routes;
