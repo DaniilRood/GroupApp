@@ -30,7 +30,6 @@
               dense
               flat
               color="deep-purple-12"
-              type="submit"
               icon="send"
             />
           </template> </q-input
@@ -90,12 +89,17 @@ export default {
   margin: 0 auto;
 }
 .chat {
-  height: 50vh;
+  height: 70vh;
 }
 .input-wrapper {
   max-width: 754px;
   height: 60px;
   background-color: #f0f0f0;
   border-radius: 10px;
+}
+@media screen and (min-height: 1440px) {
+  .chat-wrapper {
+    padding-bottom: 20vh;
+  }
 }
 </style>
