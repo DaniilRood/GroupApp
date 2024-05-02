@@ -6,7 +6,6 @@
           class="catalog-select"
           v-model="sortBooks"
           :options="sortOptions"
-          :select="sortedCard"
           emit-value
           map-options
           borderless
@@ -47,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useQuery } from "@vue/apollo-composable";
 import { getBooks } from "../graphql/queries";
@@ -56,11 +55,8 @@ import CatalogItem from "../components/CatalogItem.vue";
 
 const books = ref([]);
 
-const { result, loading, error } = useQuery(getBooks);
-
-watch(loading, (value) => {
-  if (value) return;
-  books.value = result.value?.books;
+const { result, loading, error } = useQuery(getBooks, null, {
+  fetchPolicy: "cache-and-network",
 });
 
 const selectedFilter = ref({
@@ -74,6 +70,15 @@ const sortOptions = [
   { label: "Сначала новинки", value: "newest" },
   { label: "По популярности", value: "popularity" },
 ];
+
+onMounted(() => {
+  console.log(";");
+});
+
+watch(loading, (value) => {
+  if (value) return;
+  books.value = result.value?.books;
+});
 </script>
 
 <style>
