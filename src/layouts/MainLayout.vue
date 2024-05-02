@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr fff">
     <q-header class="bg-primary" reveal height-hint="60">
       <q-toolbar class="text-grey-6">
         <div class="q-pr-lg q-pt-md">
@@ -30,7 +30,9 @@
         <div class="q-pl-md q-gutter-sm row no-wrap items-center">
           <q-btn to="/" round dense flat color="white">Главная</q-btn>
 
-          <q-btn to="/about" round dense flat color="white" size="14px"> О нас </q-btn>
+          <q-btn to="/about" round dense flat color="white" size="14px">
+            О нас
+          </q-btn>
 
           <q-btn to="/catalog" round dense flat color="white">Каталог</q-btn>
 
@@ -56,8 +58,16 @@
         <div class="footer-nav q-pa-xl">
           <div class="q-pa-md">
             <p class="text-white footer-text text-h6 q-ml-md">Страницы</p>
-            <q-btn class="text-white footer-text block" flat>Личынй кабинет</q-btn>
-            <q-btn class="text-white footer-text block" flat>Каталог</q-btn>
+            <q-btn to="/personal" class="text-white footer-text block" flat
+              >Личынй кабинет</q-btn
+            >
+            <q-btn
+              to="/catalog"
+              class="text-white footer-text block"
+              align="left"
+              flat
+              >Каталог</q-btn
+            >
           </div>
           <div class="q-pa-md">
             <p class="text-white footer-text text-h6">Контакты</p>

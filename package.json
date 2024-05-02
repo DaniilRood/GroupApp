@@ -11,15 +11,23 @@
     "build": "quasar build"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.6",
     "@quasar/extras": "^1.16.4",
+    "@vue/apollo-composable": "^4.0.0",
+    "axios": "^1.6.8",
     "core-js": "^3.31.1",
+    "firebase": "^10.11.1",
+    "graphql": "^16.8.1",
+    "graphql-ws": "^5.14.0",
     "pinia": "^2.0.0-rc.10",
     "quasar": "^2.8.0",
     "vue": "^3.4.18",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue3-google-login": "^2.0.26"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^3.9.2"
+    "@quasar/app-webpack": "^3.9.2",
+    "@quasar/quasar-app-extension-apollo": "^2.2.2"
   },
   "browserslist": [
     "last 10 Chrome versions",
