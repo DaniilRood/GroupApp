@@ -22,9 +22,7 @@ export default {
       user: null,
 
       callback: (response) => {
-        console.log("LoggedIn");
         this.loggedIn = true;
-        console.log(response);
         this.user = decodeCredential(response.credential);
       },
     };

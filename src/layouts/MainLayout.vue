@@ -28,9 +28,11 @@
         <q-space />
 
         <div class="q-pl-md q-gutter-sm row no-wrap items-center">
-          <q-btn round dense flat color="white" size="14px"> О нас </q-btn>
+          <q-btn to="/" round dense flat color="white">Главная</q-btn>
 
-          <q-btn to="/catalog" round dense flat color="white"> Каталог </q-btn>
+          <q-btn to="/about" round dense flat color="white" size="14px"> О нас </q-btn>
+
+          <q-btn to="/catalog" round dense flat color="white">Каталог</q-btn>
 
           <q-btn to="/cart" round dense flat color="white" icon="shopping_cart">
             <q-badge color="red" text-color="white" floating> 2 </q-badge>
@@ -53,9 +55,9 @@
         </div>
         <div class="footer-nav q-pa-xl">
           <div class="q-pa-md">
-            <p class="text-white footer-text text-h6">Страницы</p>
-            <p class="text-white footer-text">Личынй кабинет</p>
-            <p class="text-white footer-text">Каталог</p>
+            <p class="text-white footer-text text-h6 q-ml-md">Страницы</p>
+            <q-btn class="text-white footer-text block" flat>Личынй кабинет</q-btn>
+            <q-btn class="text-white footer-text block" flat>Каталог</q-btn>
           </div>
           <div class="q-pa-md">
             <p class="text-white footer-text text-h6">Контакты</p>
