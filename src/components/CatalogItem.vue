@@ -19,4 +19,26 @@
   </q-card>
 </template>
 
-<script setup></script>
+<script setup>
+import { truncateString } from "../helpers/truncate";
+import { defineProps } from "vue";
+
+const { books } = defineProps({
+  books: {
+    type: Array,
+    required: true,
+  },
+});
+</script>
+
+<style>
+.catalog-list__products {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 220px);
+  grid-template-rows: repeat(2, 400px);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  margin-bottom: 170px;
+}
+</style>

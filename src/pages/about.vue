@@ -1,6 +1,6 @@
 <template>
-  <q-page class="wrapper">
-    <p class="text-h4 text-center text-dark text-weight-bolder">О нас</p>
+  <q-page class="about-wrapper">
+    <p class="text-h4 text-center text-dark text-weight-bold">О нас</p>
     <div class="flex flex-center q-mb-xl">
       <p class="text-h6 format-text">
         Мы — бесплатный сервис по поиску книг. После короткого опроса наш
@@ -20,9 +20,11 @@
 </template>
 
 <style>
-.wrapper {
-  margin: 0 auto;
-  width: 1200px;
+.about-wrapper {
+  margin: 100px auto 0;
+  max-width: 1140px;
+  width: 100%;
+  letter-spacing: 2px;
 }
 .format-text {
   width: 800px;

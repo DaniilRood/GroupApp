@@ -4,33 +4,17 @@
       <nav class="catalog__navbar">
         <q-select
           class="catalog-select"
-          v-model="selectedSort"
+          v-model="sortBooks"
           :options="sortOptions"
+          :select="sortedCard"
           emit-value
           map-options
           borderless
         />
       </nav>
-      <h2 v-if="loading">Loading...</h2>
-      <div v-else class="catalog-list__products q-gutter-md">
-        <q-card v-for="book in books" :key="book.id" class="q-pt-sm q-pb-sm">
-          <q-card-section>
-            <img :src="book.image" />
-            <q-item-section>
-              <q-item-label class="q-pt-sm q-pb-sm text-weight-bold">{{
-                truncateString(book.title, 12)
-              }}</q-item-label>
-              <div class="q-pb-sm text-subtitle2 text-weight-bold text-red">
-                {{ truncateString(book.author, 14) }}
-              </div>
-              <q-separator inset />
-              <div class="q-pt-sm text-subtitle2">Цена: {{ book.price }}₽</div>
-            </q-item-section>
-            <q-card-actions vertical>
-              <q-btn color="secondary" class="text-black"> Купить </q-btn>
-            </q-card-actions></q-card-section
-          >
-        </q-card>
+      <div class="catalog-list__products q-gutter-md">
+        <h2 v-if="loading">Loading...</h2>
+        <CatalogItem v-else :books="books" />
       </div>
       <!-- <q-pagination
         class="q-pb-xl"
@@ -44,7 +28,9 @@
       /> -->
     </div>
     <div class="catalog-options">
-      <h3 class="q-mt-none">Каталог</h3>
+      <h3 class="catalog-heading q-mt-none text-dark text-weight-bold">
+        Каталог
+      </h3>
       <!-- <q-tabs v-model="tab" indicator-color="primary" align="justify">
         <q-tab to="/catalog" name="all" label="Все" />
         <q-tab to="/" name="new" label="Новинки" />
@@ -64,23 +50,13 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
+import { getBooks } from "../graphql/queries";
 import { truncateString } from "../helpers/truncate";
+import CatalogItem from "../components/CatalogItem.vue";
 
 const books = ref([]);
 
-const { result, loading, error } = useQuery(gql`
-  query BooksCatalog {
-    books {
-      id
-      image
-      title
-      author
-      price
-      genre
-    }
-  }
-`);
+const { result, loading, error } = useQuery(getBooks);
 
 watch(loading, (value) => {
   if (value) return;
@@ -91,7 +67,7 @@ const selectedFilter = ref({
   author: false,
   genre: false,
 });
-const selectedSort = ref("priceLowToHigh");
+const sortBooks = ref("priceLowToHigh");
 const sortOptions = [
   { label: "Сначала дешёвые", value: "priceLowToHigh" },
   { label: "Сначала дорогие", value: "priceHighToLow" },
@@ -112,6 +88,10 @@ const sortOptions = [
 .catalog__navbar {
   display: flex;
   justify-content: end;
+}
+.catalog-heading {
+  letter-spacing: 2px;
+  font-size: 36px;
 }
 .q-ripple {
   display: none !important;
@@ -137,14 +117,5 @@ const sortOptions = [
 }
 .catalog-options {
   flex-basis: 240px;
-}
-.catalog-list__products {
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(4, 220px);
-  grid-template-rows: repeat(2, 400px);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  margin-bottom: 170px;
 }
 </style>

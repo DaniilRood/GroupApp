@@ -1,7 +1,9 @@
 <template>
   <div class="cart">
     <nav class="cart__navbar">
-      <h2 class="cart__navbar_heading">Корзина</h2>
+      <h3 class="cart__navbar_heading q-mt-none text-dark text-weight-bold">
+        Корзина
+      </h3>
       <q-btn
         to="/catalog"
         exact
@@ -21,8 +23,8 @@
 .cart {
   margin: 100px auto 0;
   max-width: 1140px;
+  width: 100%;
   letter-spacing: 2px;
-  padding-top: 20px;
   display: grid;
   grid-template-columns: 1140px;
   justify-content: center;
@@ -33,8 +35,6 @@
     &_heading {
       letter-spacing: 2px;
       font-size: 36px;
-      color: #1a5b79;
-      font-weight: bold;
     }
   }
 
