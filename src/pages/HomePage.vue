@@ -77,7 +77,9 @@ import CatalogItem from "../components/CatalogItem.vue";
 
 const books = ref([]);
 
-const { result, loading, error } = useQuery(getNewBooks);
+const { result, loading, error } = useQuery(getNewBooks, null, {
+  fetchPolicy: "cache-and-network",
+});
 
 watch(loading, (value) => {
   if (value) return;

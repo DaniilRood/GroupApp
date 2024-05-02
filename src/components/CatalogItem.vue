@@ -21,13 +21,16 @@
 
 <script setup>
 import { truncateString } from "../helpers/truncate";
-import { defineProps } from "vue";
+import { defineProps, onMounted } from "vue";
 
 const { books } = defineProps({
   books: {
     type: Array,
     required: true,
   },
+});
+onMounted(() => {
+  console.log(books);
 });
 </script>
 
