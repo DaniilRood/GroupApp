@@ -12,8 +12,7 @@
         />
       </nav>
       <div class="catalog-list__products q-gutter-md">
-        <h2 v-if="loading">Loading...</h2>
-        <CatalogItem v-else :books="books" />
+        <CatalogItem :books="books.getBooks" />
       </div>
       <!-- <q-pagination
         class="q-pb-xl"
@@ -48,16 +47,10 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { useQuery } from "@vue/apollo-composable";
-import { getBooks } from "../graphql/queries";
 import { truncateString } from "../helpers/truncate";
 import CatalogItem from "../components/CatalogItem.vue";
-
-const books = ref([]);
-
-const { result, loading, error } = useQuery(getBooks, null, {
-  fetchPolicy: "cache-and-network",
-});
+import { useBooksStore } from "src/store/books";
+const books = useBooksStore();
 
 const selectedFilter = ref({
   author: false,
@@ -70,15 +63,6 @@ const sortOptions = [
   { label: "Сначала новинки", value: "newest" },
   { label: "По популярности", value: "popularity" },
 ];
-
-onMounted(() => {
-  console.log(";");
-});
-
-watch(loading, (value) => {
-  if (value) return;
-  books.value = result.value?.books;
-});
 </script>
 
 <style>
