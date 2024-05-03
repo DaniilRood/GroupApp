@@ -44,8 +44,7 @@
           <q-btn xl color="accent" clickable>Купить</q-btn>
         </q-card-actions>
       </q-card> -->
-      <h2 v-if="loading">Loading...</h2>
-      <CatalogItem v-else :books="books" />
+      <CatalogItem :books="books.getNewSixBooks" />
     </div>
 
     <div class="col-6 q-mb-xl">
@@ -71,20 +70,18 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useQuery } from "@vue/apollo-composable";
-import { getNewBooks } from "../graphql/queries";
+import { getBooks } from "../graphql/queries";
 import { truncateString } from "../helpers/truncate";
 import CatalogItem from "../components/CatalogItem.vue";
+import { useBooksStore } from "src/store/books";
+const books = useBooksStore();
 
-const books = ref([]);
+// const { result, loading, error } = useQuery(getBooks);
 
-const { result, loading, error } = useQuery(getNewBooks, null, {
-  fetchPolicy: "cache-and-network",
-});
-
-watch(loading, (value) => {
-  if (value) return;
-  books.value = result.value?.books;
-});
+// watch(loading, (value) => {
+//   if (value) return;
+//   books.setBooks(result.value?.books);
+// });
 
 defineOptions({
   name: "IndexPage",
