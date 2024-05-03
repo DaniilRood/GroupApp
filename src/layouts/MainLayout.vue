@@ -42,7 +42,7 @@
           </q-btn>
 
           <q-btn to="/personal" round flat icon="perm_identity" color="white">
-            <q-tooltip>Личынй кабинет</q-tooltip>
+            <q-tooltip>Личный кабинет</q-tooltip>
           </q-btn>
 
           <q-btn color="secondary" class="text-black"> Выйти </q-btn>
