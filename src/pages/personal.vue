@@ -9,8 +9,8 @@
         <q-avatar size="100px" font-size="52px" color="teal" text-color="white" class="q-mb-">
           <img src="https://cdn.quasar.dev/img/avatar.png">
         </q-avatar>  
-        <p class="text-h6 text-bold text-dark">{{ name }} {{ surname }}</p>
-        <p class="text-h6 text-bold text-dark">{{ email }}</p>
+        <p class="text-h6 text-bold text-dark"></p>
+        <p class="text-h6 text-bold text-dark"></p>
       </div>
 
       <div class="shadow-4 q-pa-md q-ml-xl box-order rounded-borders">

@@ -29,9 +29,6 @@ const { books } = defineProps({
     required: true,
   },
 });
-onMounted(() => {
-  console.log(books);
-});
 </script>
 
 <style>
