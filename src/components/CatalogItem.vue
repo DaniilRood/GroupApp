@@ -1,5 +1,5 @@
 <template>
-  <q-card v-for="book in books" :key="book.id" class="q-pt-sm q-pb-sm">
+  <q-card class="q-pt-sm q-pb-sm">
     <q-card-section>
       <img :src="book.image" />
       <q-item-section>
@@ -13,7 +13,9 @@
         <div class="q-pt-sm text-subtitle2">Цена: {{ book.price }}₽</div>
       </q-item-section>
       <q-card-actions vertical>
-        <q-btn color="secondary" class="text-black"> Купить </q-btn>
+        <q-btn @click="addToCart" color="secondary" class="text-black">
+          Купить
+        </q-btn>
       </q-card-actions></q-card-section
     >
   </q-card>
@@ -22,13 +24,19 @@
 <script setup>
 import { truncateString } from "../helpers/truncate";
 import { defineProps, onMounted } from "vue";
+import { useCartStore } from "src/store/cart";
 
-const { books } = defineProps({
-  books: {
-    type: Array,
+const cartStore = useCartStore();
+const { book } = defineProps({
+  book: {
+    type: Object,
     required: true,
   },
 });
+
+const addToCart = () => {
+  cartStore.addToCart(book);
+};
 </script>
 
 <style>

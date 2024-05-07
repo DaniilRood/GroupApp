@@ -13,11 +13,48 @@
         label="Назад в каталог"
       />
     </nav>
-    <p class="cart__state">В корзине ничего нет</p>
+
+    <div class="cart-list__products q-gutter-md">
+      <CartItem v-for="book in cartStore.getCart" :key="book.id" :book="book" />
+      <!-- {{ cartStore.cart }} -->
+    </div>
+
+    <p v-if="cartStore.getCart.length === 0" class="cart__state">
+      В корзине ничего нет
+    </p>
+
+    <h3
+      v-if="cartStore.getCart.length !== 0"
+      class="cart__navbar_heading q-mt-none text-dark text-weight-bold"
+    >
+      Итоговая сумма: {{ totalPrice }}₽
+    </h3>
   </div>
 </template>
 
-<script></script>
+<script setup>
+import { ref, watch } from "vue";
+import CartItem from "../components/CartItem.vue";
+import { useCartStore } from "src/store/cart";
+
+const cartStore = useCartStore();
+
+const totalPrice = ref(
+  cartStore.getCart.reduce((accumulator, book) => {
+    return accumulator + book.price * book.quantity;
+  }, 0)
+);
+
+watch(
+  cartStore.getCart,
+  () => {
+    totalPrice.value = cartStore.getCart.reduce((accumulator, book) => {
+      return accumulator + book.price * book.quantity;
+    }, 0);
+  },
+  { deep: true }
+);
+</script>
 
 <style lang="scss">
 .cart {

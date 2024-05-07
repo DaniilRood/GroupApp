@@ -44,7 +44,11 @@
           <q-btn xl color="accent" clickable>Купить</q-btn>
         </q-card-actions>
       </q-card> -->
-      <CatalogItem :books="books.getNewSixBooks" />
+      <CatalogItem
+        v-for="book in books.getNewSixBooks"
+        :key="book.id"
+        :book="book"
+      />
     </div>
 
     <div class="col-6 q-mb-xl">

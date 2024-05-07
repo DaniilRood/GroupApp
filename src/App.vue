@@ -19,6 +19,6 @@ const { result, loading, error } = useQuery(getBooks);
 
 watch(loading, (value) => {
   if (value) return;
-  books.setBooks(result.value?.books);
+  books.setBooks(result.value?.books.map((book) => ({ ...book, quantity: 1 })));
 });
 </script>

@@ -14,7 +14,7 @@
       </nav>
       <div class="catalog-list__products q-gutter-md">
         <h2 v-if="loading">Loading...</h2>
-        <CatalogItem v-else :books="sortedBooks ?? books.getBooks" />
+        <CatalogItem v-else v-for="book in books" :key="book.id" :book="book" />
       </div>
       <!-- <q-pagination
         class="q-pb-xl"
@@ -89,10 +89,12 @@ import {
 } from "src/graphql/queries";
 import apolloClient from "src/apollo/apollo-client";
 
+// :books="sortedBooks ?? books.getBooks"
 provideApolloClient(apolloClient);
 
-const books = useBooksStore();
-const sortedBooks = ref(null);
+const booksStore = useBooksStore();
+// const sortedBooks = ref(null);
+const books = ref(booksStore.getBooks);
 const loading = ref(null);
 
 const selectedFilter = ref([]);
@@ -101,15 +103,28 @@ const getFilteredBooks = (filtersArray) => {
   if (filtersArray.length > 0) {
     const { result, loading } = useQuery(getBooksByGenre(filtersArray));
     loading.value = loading;
-    sortedBooks.value = result.value ? result.value.books : [];
+    books.value = result.value ? result.value.books : [];
 
     watch(result, (newValue) => {
       if (newValue) {
-        sortedBooks.value = newValue.books;
+        books.value = newValue.books.map((book) => ({
+          ...book,
+          quantity: 1,
+        }));
       }
     });
-  } else sortedBooks.value = null;
+  } else books.value = booksStore.getBooks;
 };
+
+function arrayToObj(arr) {
+  const obj = {};
+  arr.forEach((item, index) => {
+    obj["book" + (index + 1)] = item;
+  });
+  return obj;
+}
+
+const result = arrayToObj(booksStore.getBooks);
 
 const sortBooks = ref("priceLowToHigh");
 const sortOptions = [
@@ -130,11 +145,14 @@ const getSortedBooks = (value) => {
   }
   const { result, loading } = useQuery(sortedQuery);
   loading.value = loading;
-  sortedBooks.value = result.value ? result.value.books : [];
+  books.value = result.value ? result.value.books : [];
 
   watch(result, (newValue) => {
     if (newValue) {
-      sortedBooks.value = newValue.books;
+      books.value = newValue.books.map((book) => ({
+        ...book,
+        quantity: 1,
+      }));
     }
   });
 };
