@@ -1,18 +1,19 @@
 import { defineStore } from "pinia";
 
-export const booksStore = defineStore("books", {
+export const useBooksStore = defineStore("books", {
   state: () => ({
     books: [],
-    cart: [],
   }),
 
-  // actions: {
-  //   addToCart(book) {
-  //     this.cart.push(book);
-  //   },
+  getters: {
+    getBooks: (state) => state.books,
+    getNewSixBooks: (state) =>
+      state.books.filter((book) => book.new).slice(0, 6),
+  },
 
-  //   removeFromCart(id) {
-  //     this.cart = this.cart.filter((item) => item.id !== id);
-  //   },
-  // },
+  actions: {
+    setBooks(books) {
+      this.books.push(...books);
+    },
+  },
 });

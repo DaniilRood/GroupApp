@@ -37,12 +37,19 @@
           <q-btn to="/catalog" round dense flat color="white">Каталог</q-btn>
 
           <q-btn to="/cart" round dense flat color="white" icon="shopping_cart">
-            <q-badge color="red" text-color="white" floating> 2 </q-badge>
+            <q-badge color="red" text-color="white" floating>
+              {{
+                cartStore.getCart.reduce((accumulator, book) => {
+                  return accumulator + book.quantity;
+                }, 0)
+              }}
+            </q-badge>
+
             <q-tooltip>Корзина</q-tooltip>
           </q-btn>
 
           <q-btn to="/personal" round flat icon="perm_identity" color="white">
-            <q-tooltip>Личынй кабинет</q-tooltip>
+            <q-tooltip>Личный кабинет</q-tooltip>
           </q-btn>
 
           <q-btn color="secondary" class="text-black"> Выйти </q-btn>
@@ -88,11 +95,13 @@
 <script setup>
 import { ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { useCartStore } from "src/store/cart";
 
 defineOptions({
   name: "MainLayout",
 });
 
+const cartStore = useCartStore();
 const leftDrawerOpen = ref(false);
 
 function toggleLeftDrawer() {

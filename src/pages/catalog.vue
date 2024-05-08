@@ -9,37 +9,55 @@
           emit-value
           map-options
           borderless
+          @update:model-value="getSortedBooks"
         />
       </nav>
       <div class="catalog-list__products q-gutter-md">
         <h2 v-if="loading">Loading...</h2>
-        <CatalogItem v-else :books="books" />
+        <CatalogItem v-else v-for="book in books" :key="book.id" :book="book" />
       </div>
-      <!-- <q-pagination
-        class="q-pb-xl"
-        :max="3"
-        direction-links
-        outline
-        color="black"
-        active-design="unelevated"
-        active-color="secondary"
-        active-text-color="black"
-      /> -->
     </div>
     <div class="catalog-options">
       <h3 class="catalog-heading q-mt-none text-dark text-weight-bold">
         Каталог
       </h3>
-      <!-- <q-tabs v-model="tab" indicator-color="primary" align="justify">
-        <q-tab to="/catalog" name="all" label="Все" />
-        <q-tab to="/" name="new" label="Новинки" />
-      </q-tabs> -->
       <q-list class="checkbox-filter">
-        <p class="q-ml-md">Авторы</p>
-        <q-checkbox v-model="selectedFilter.author" label="Автор" size="40px" />
         <p class="q-ml-md">Жанры</p>
-        <q-checkbox v-model="selectedFilter.genre" label="Жанр" size="40px" />
-        <pre>{{ selectedFilter }}</pre>
+        <q-checkbox
+          v-model="selectedFilter"
+          label="Айти"
+          size="40px"
+          val="Айти"
+          @update:model-value="getFilteredBooks"
+        />
+        <q-checkbox
+          v-model="selectedFilter"
+          label="Дизайн"
+          size="40px"
+          val="Дизайн"
+          @update:model-value="getFilteredBooks"
+        />
+        <q-checkbox
+          v-model="selectedFilter"
+          label="Комикс"
+          size="40px"
+          val="Комикс"
+          @update:model-value="getFilteredBooks"
+        />
+        <q-checkbox
+          v-model="selectedFilter"
+          label="Проза"
+          size="40px"
+          val="Проза"
+          @update:model-value="getFilteredBooks"
+        />
+        <q-checkbox
+          v-model="selectedFilter"
+          label="Фэнтези"
+          size="40px"
+          val="Фэнтези"
+          @update:model-value="getFilteredBooks"
+        />
       </q-list>
     </div>
   </q-page>
@@ -48,37 +66,83 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { useQuery } from "@vue/apollo-composable";
-import { getBooks } from "../graphql/queries";
 import { truncateString } from "../helpers/truncate";
 import CatalogItem from "../components/CatalogItem.vue";
+import { useBooksStore } from "src/store/books";
+import { useQuery, provideApolloClient } from "@vue/apollo-composable";
+import {
+  getBooksByAscPrice,
+  getBooksByDescPrice,
+  getBooksNew,
+  getBooksByGenre,
+} from "src/graphql/queries";
+import apolloClient from "src/apollo/apollo-client";
 
-const books = ref([]);
+provideApolloClient(apolloClient);
 
-const { result, loading, error } = useQuery(getBooks, null, {
-  fetchPolicy: "cache-and-network",
-});
+const booksStore = useBooksStore();
+const books = ref(booksStore.getBooks);
+const loading = ref(null);
 
-const selectedFilter = ref({
-  author: false,
-  genre: false,
-});
+const selectedFilter = ref([]);
+
+const getFilteredBooks = (filtersArray) => {
+  if (filtersArray.length > 0) {
+    const { result, loading } = useQuery(getBooksByGenre(filtersArray));
+    loading.value = loading;
+    books.value = result.value ? result.value.books : [];
+
+    watch(result, (newValue) => {
+      if (newValue) {
+        books.value = newValue.books.map((book) => ({
+          ...book,
+          quantity: 1,
+        }));
+      }
+    });
+  } else books.value = booksStore.getBooks;
+};
+
+function arrayToObj(arr) {
+  const obj = {};
+  arr.forEach((item, index) => {
+    obj["book" + (index + 1)] = item;
+  });
+  return obj;
+}
+
+const result = arrayToObj(booksStore.getBooks);
+
 const sortBooks = ref("priceLowToHigh");
 const sortOptions = [
   { label: "Сначала дешёвые", value: "priceLowToHigh" },
   { label: "Сначала дорогие", value: "priceHighToLow" },
   { label: "Сначала новинки", value: "newest" },
-  { label: "По популярности", value: "popularity" },
 ];
+let sortedQuery = null;
+const getSortedBooks = (value) => {
+  if (value === "priceLowToHigh") {
+    sortedQuery = getBooksByAscPrice;
+  }
+  if (value === "priceHighToLow") {
+    sortedQuery = getBooksByDescPrice;
+  }
+  if (value === "newest") {
+    sortedQuery = getBooksNew;
+  }
+  const { result, loading } = useQuery(sortedQuery);
+  loading.value = loading;
+  books.value = result.value ? result.value.books : [];
 
-onMounted(() => {
-  console.log(";");
-});
-
-watch(loading, (value) => {
-  if (value) return;
-  books.value = result.value?.books;
-});
+  watch(result, (newValue) => {
+    if (newValue) {
+      books.value = newValue.books.map((book) => ({
+        ...book,
+        quantity: 1,
+      }));
+    }
+  });
+};
 </script>
 
 <style>
