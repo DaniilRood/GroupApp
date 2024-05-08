@@ -16,16 +16,6 @@
         <h2 v-if="loading">Loading...</h2>
         <CatalogItem v-else v-for="book in books" :key="book.id" :book="book" />
       </div>
-      <!-- <q-pagination
-        class="q-pb-xl"
-        :max="3"
-        direction-links
-        outline
-        color="black"
-        active-design="unelevated"
-        active-color="secondary"
-        active-text-color="black"
-      /> -->
     </div>
     <div class="catalog-options">
       <h3 class="catalog-heading q-mt-none text-dark text-weight-bold">
@@ -68,7 +58,6 @@
           val="Фэнтези"
           @update:model-value="getFilteredBooks"
         />
-        <!-- <pre>{{ selectedFilter }}</pre> -->
       </q-list>
     </div>
   </q-page>
@@ -89,11 +78,9 @@ import {
 } from "src/graphql/queries";
 import apolloClient from "src/apollo/apollo-client";
 
-// :books="sortedBooks ?? books.getBooks"
 provideApolloClient(apolloClient);
 
 const booksStore = useBooksStore();
-// const sortedBooks = ref(null);
 const books = ref(booksStore.getBooks);
 const loading = ref(null);
 

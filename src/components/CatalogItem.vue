@@ -25,6 +25,7 @@
 import { truncateString } from "../helpers/truncate";
 import { defineProps, onMounted } from "vue";
 import { useCartStore } from "src/store/cart";
+import { useQuasar } from "quasar";
 
 const cartStore = useCartStore();
 const { book } = defineProps({
@@ -34,8 +35,15 @@ const { book } = defineProps({
   },
 });
 
+const $q = useQuasar();
 const addToCart = () => {
   cartStore.addToCart(book);
+  $q.notify({
+    message: "Добавлено в корзину",
+    color: "primary",
+    position: "right",
+    timeout: 100,
+  });
 };
 </script>
 
